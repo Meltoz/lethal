@@ -1,0 +1,24 @@
+.slide {
+    display: none;
+    transition: transform 0.5s ease;
+    position: absolute;
+    width: 100%;
+}
+
+.slide.active {
+    display: block;
+    transform: translateX(39%);
+    z-index: 2;
+}
+
+.slide.previous {
+    display: block;
+    transform: translateX(-100%);
+    z-index: 1;
+}
+
+.slide.next {
+    display: block;
+    transform: translateX(100%);
+    z-index: 1;
+}
