@@ -7,18 +7,24 @@
 
 .slide.active {
     display: block;
-    transform: translateX(39%);
+    transform: translateX(1%);
     z-index: 2;
 }
 
 .slide.previous {
     display: block;
-    transform: translateX(-100%);
+    transform: translateX(100%);
     z-index: 1;
 }
 
 .slide.next {
     display: block;
-    transform: translateX(100%);
+    transform: translateX(-100%);
     z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .slide.active{
+        transform: translateX(31%);
+    }
 }

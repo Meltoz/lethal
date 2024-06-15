@@ -5,6 +5,7 @@ interface CarouselProps {
     children: ReactNode;
     showButtons: boolean;
     showDots: boolean;
+    infinite: boolean;
     // autoplay, timer, infinite...
 }
 
@@ -22,6 +23,8 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         this.state = {
             index: 0,
         };
+        if(this.props.infinite)
+            setInterval(() =>this.increment(), 5000)
         this.totalItems = Children.count(this.props.children);
     }
 
@@ -31,11 +34,13 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     }
 
     decrement = () =>{
-        let newIndex = 0;
+        let newIndex: number;
         if(this.totalItems === 0){
             newIndex = 0;
+        }else{
+            newIndex = this.canDecrement() ? this.totalItems-1 : this.state.index-1;
         }
-        newIndex = this.canDecrement() ? this.totalItems-1 : this.state.index-1;
+
         this.setState({index: newIndex});
     }
 
@@ -49,13 +54,13 @@ class Carousel extends Component<CarouselProps, CarouselState> {
 
     showPreviousButton(){
         if(this.props.showButtons)
-            return <button className={"z-10 px-3 py-2 border-white border-[1px] rounded-full backdrop-blur-sm bg-neutral-400/50"} onClick={this.decrement}>←</button>;
+            return <button className={"z-10 h-10 px-3 py-2 border-white border-[1px] rounded-full backdrop-blur-sm bg-neutral-400/50"} onClick={this.decrement}>←</button>;
         return null;
     }
 
     showNextButton(){
         if(this.props.showButtons)
-            return <button className={"z-10 px-3 py-2 border-white border-[1px] rounded-full backdrop-blur-sm bg-neutral-400/50"} onClick={this.increment}>→</button>;
+            return <button className={"z-10 h-10 px-3 py-2 border-white border-[1px] rounded-full backdrop-blur-sm bg-neutral-400/50"} onClick={this.increment}>→</button>;
         return null;
     }
 
@@ -63,7 +68,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         if(this.props.showDots){
             return Array.from({length: this.totalItems}, (_, index) =>{
                 return <div key={index}
-                            className={" cursor-pointer h-2 w-2 bg-neutral-900 ring-1 ring-white rounded-full transition-all duration-300 " + (this.state.index === index? 'bg-white': '')}
+                            className={"cursor-pointer h-2 w-2 bg-neutral-900 ring-1 ring-white rounded-full transition-all duration-300 " + (this.state.index === index? 'bg-white': '')}
                             onClick={() =>this.setState({index: index})}></div>
             });
         }
@@ -99,9 +104,9 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         return (
             <div>
                 <div className="flex flex-col gap-10">
-                    <main className={"flex justify-between mx-20"}>
+                    <main className={"flex justify-between md:mx-20 mx-10 items-center"}>
                         {this.showPreviousButton()}
-                        <div className="flex justify-center items-center overflow-hidden relative w-screen">{this.renderSlides()}</div>
+                        <div className="flex justify-center items-center overflow-hidden relative w-screen h-52">{this.renderSlides()}</div>
                         {this.showNextButton()}
                     </main>
                     <div className="dots flex justify-center gap-5 mt-5">

@@ -4,23 +4,27 @@ import Carousel from "../carousel/Carousel";
 import ReviewCard from "./review-card/review-card";
 
 class Review extends Component {
-    private responsive = {
-        desktop: {
-            breakpoint: {max: 3000, min: 1024},
-            items: 3,
-            slidesToSlide: 3 // optional, default to 1.
-        },
-        tablet: {
-            breakpoint: {max: 1024, min: 464},
-            items: 2,
-            slidesToSlide: 2 // optional, default to 1.
-        },
-        mobile: {
-            breakpoint: {max: 464, min: 0},
-            items: 1,
-            slidesToSlide: 1 // optional, default to 1.
-        }
-    }
+    private reviews = [{
+        title:"Une entreprise convivial",
+        commentaire: "Je me suis fait plus que des collegues, j'ai maintenant des amis.",
+        name:"Maxime M.",
+        star: 5
+    },{
+        title:'Un endroit idéal',
+        commentaire: "C'est une entreprise parfaite pour ceux qui ont peur des grandes multinationnales.",
+        name:"Romain C.",
+        star: 5
+    },{
+        title:'Un endroit chaleureux',
+        commentaire: "Service RH au top, management compréhensif de l'humain.",
+        name:"Celeste F.",
+        star: 5
+    },{
+        title:'Best place to work #1',
+        commentaire: "De ma vie je n'ai jamais connu d'endroit aussi merveilleux pour travailler.",
+        name:"Alexis G.",
+        star: 5
+    },]
 
 
     render() {
@@ -31,12 +35,12 @@ class Review extends Component {
                 <div className={"my-10"}>
                     <Carousel
                         showButtons={true}
-                        showDots={true}>
-                        <ReviewCard commentaire="Hey j'adore cet entreprise" name={"Meltoz"} star={4} />
-                        <ReviewCard commentaire="Hey j'adore cet entreprise" name={"Meltoz"} star={4} />
-                        <ReviewCard commentaire="Hey j'adore cet entreprise" name={"Meltoz"} star={4} />
-                        <ReviewCard commentaire="Hey j'adore cet entreprise" name={"Meltoz"} star={4} />
-                        <ReviewCard commentaire="Hey j'adore cet entreprise" name={"Meltoz"} star={4} />
+                        showDots={true}
+                        infinite={true}>
+                        {
+                            this.reviews.map((review, index) =>
+                                <ReviewCard key={index} title={review.title} commentaire={review.commentaire} name={review.name} star={review.star}/>)
+                        }
                     </Carousel>
                 </div>
 
