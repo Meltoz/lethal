@@ -20,8 +20,8 @@ class ReviewCard extends Component<ReviewProps, ReviewState> {
     }
     render() {
         return (
-            <div className={"relative md:h-52 h-96"}>
-                <section className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-neutral-500 border-2 rounded-lg p-2">
+            <div className={"relative h-96 min-h-52 mr-24 w-56"}>
+                <section className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-neutral-500 border-2 rounded-lg p-2 w-full md:w-96">
                     <div className={"flex justify-between my-2 ml-2 mr-5"}>
                         <p className={"font-bold text-xl "}>{this.props.title}</p>
                         <p>{this.calcStar()}</p>

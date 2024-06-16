@@ -37,18 +37,19 @@ class Review extends Component {
             autoplay: true,
             speed: 10000,
             autoplaySpeed: 1,
-            cssEase: "linear"
+            cssEase: "linear",
+            arrows: false,
         };
 
         return (
             <div className="bg-neutral-900">
                 <h2 className="text-red-600 text-5xl font-bold text-center">Les avis<br/> de nos collaborateurs
                 </h2>
-                <div className="slider-container py-20">
+                <div className="slider-container w-full">
                     <Slider {...settings}>
                         {this.reviews.map((review, index) =>
                             <div key={index} className={"flex justify-center"}>
-                                {<ReviewCard title={review.title} commentaire={review.commentaire} name={review.name} star={review.star} />}
+                                <ReviewCard title={review.title} commentaire={review.commentaire} name={review.name} star={review.star} />
                             </div>
                             )
                         }
