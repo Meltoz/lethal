@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import 'react-multi-carousel/lib/styles.css';
-import Carousel from "../carousel/Carousel";
 import ReviewCard from "./review-card/review-card";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 class Review extends Component {
     private reviews = [{
         title:"Une entreprise convivial",
         commentaire: "Je me suis fait plus que des collegues, j'ai maintenant des amis.",
         name:"Maxime M.",
-        star: 5
+        star: 4
     },{
         title:'Un endroit idéal',
         commentaire: "C'est une entreprise parfaite pour ceux qui ont peur des grandes multinationnales.",
@@ -28,22 +29,31 @@ class Review extends Component {
 
 
     render() {
+        const settings = {
+            center: true,
+            infinite: true,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            autoplay: true,
+            speed: 10000,
+            autoplaySpeed: 1,
+            cssEase: "linear"
+        };
+
         return (
             <div className="bg-neutral-900">
                 <h2 className="text-red-600 text-5xl font-bold text-center">Les avis<br/> de nos collaborateurs
                 </h2>
-                <div className={"my-10"}>
-                    <Carousel
-                        showButtons={true}
-                        showDots={true}
-                        infinite={true}>
-                        {
-                            this.reviews.map((review, index) =>
-                                <ReviewCard key={index} title={review.title} commentaire={review.commentaire} name={review.name} star={review.star}/>)
+                <div className="slider-container py-20">
+                    <Slider {...settings}>
+                        {this.reviews.map((review, index) =>
+                            <div key={index} className={"flex justify-center"}>
+                                {<ReviewCard title={review.title} commentaire={review.commentaire} name={review.name} star={review.star} />}
+                            </div>
+                            )
                         }
-                    </Carousel>
+                    </Slider>
                 </div>
-
             </div>
         );
     }
